@@ -8,7 +8,12 @@
   <style>
     /* General Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #333; background: #f4f4f4; }
+    body { 
+      font-family: 'Roboto', sans-serif; 
+      line-height: 1.6; 
+      color: #333; 
+      background: #f4f4f4; /* Professional light gray background */
+    }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     
@@ -171,7 +176,9 @@
   <header>
     <div class="container">
       <nav>
-        <div class="logo"><a href="https://market-pulse.org">Market Pulse</a></div>
+        <div class="logo">
+          <a href="https://market-pulse.org">Market Pulse</a>
+        </div>
         <ul>
           <li><a href="#features">Features</a></li>
           <li><a href="#signup">Join Us</a></li>
@@ -187,7 +194,9 @@
     <div class="container">
       <h1>Welcome to Market Pulse</h1>
       <p>Your gateway to real-time market insights and analysis.</p>
-      <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'});">Get Started</button>
+      <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'});">
+        Get Started
+      </button>
     </div>
   </section>
   
@@ -217,7 +226,7 @@
     <div class="container">
       <h2>Join Our Family</h2>
       <div class="lead-form-container">
-        <form action="https://script.google.com/macros/s/AKfycbwPAFL9Zp93xZ9KOhkKBHusM9Kz7-obficqP6PymSQ7JgZw5LNc1WgmZo8vRBK2G62Y/exec" method="POST">
+        <form id="leadForm" action="https://script.google.com/macros/s/AKfycbwPAFL9Zp93xZ9KOhkKBHusM9Kz7-obficqP6PymSQ7JgZw5LNc1WgmZo8vRBK2G62Y/exec" method="POST">
           <div>
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your Name">
@@ -254,5 +263,28 @@
       <p><a href="https://market-pulse.org" target="_blank">Visit Market Pulse</a></p>
     </div>
   </footer>
+  
+  <!-- JavaScript for Form Submission -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('leadForm');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+        const formData = new FormData(form);
+        // Use fetch with no-cors mode to avoid JSON parsing issues
+        fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        }).then(() => {
+          alert('Thank you for joining our family!');
+          form.reset();
+        }).catch((error) => {
+          console.error('Submission Error:', error);
+          alert('Submission failed. Please try again later.');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
