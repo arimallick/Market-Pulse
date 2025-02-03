@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Pulse - Real-Time Market Insights</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Roboto', sans-serif; 
+      line-height: 1.6; 
+      color: #333; 
+      background: #f4f4f4;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+    
+    /* Header */
+    header { background: #2c3e50; color: #fff; padding: 20px 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    nav .logo { font-size: 1.8em; font-weight: 700; }
+    nav ul { display: flex; }
+    nav ul li { margin-left: 20px; }
+    nav ul li a:hover { color: #ffdd57; }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #2c3e50, #4b6584);
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero h1 { font-size: 3em; margin-bottom: 20px; }
+    .hero p { font-size: 1.2em; margin-bottom: 30px; }
+    .hero .cta-btn {
+      background: #ffdd57;
+      color: #333;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero .cta-btn:hover { background: #e6c84a; }
+    
+    /* Lead Form Section */
+    .lead-section {
+      padding: 60px 20px;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    .lead-form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .lead-form-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .lead-form-container label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .lead-form-container input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 15px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .lead-form-container input:focus {
+      border-color: #4b6584;
+      box-shadow: 0 0 8px rgba(75, 101, 132, 0.4);
+      outline: none;
+    }
+    .lead-form-container button {
+      background: linear-gradient(90deg, #4b6584, #2c3e50);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .lead-form-container button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(75, 101, 132, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="#">Market Pulse</a>
+        </div>
+        <ul>
+          <li><a href="#signup">Join Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="container">
+      <h1>Welcome to Market Pulse</h1>
+      <p>Your gateway to real-time market insights and analysis.</p>
+      <button class="cta-btn" onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'});">
+        Get Started
+      </button>
+    </div>
+  </section>
+  
+  <section class="lead-section" id="signup">
+    <div class="container">
+      <h2>Join Our Family</h2>
+      <div class="lead-form-container">
+        <form id="leadForm" action="https://script.google.com/macros/s/AKfycbw_PGa2tshQvL4NJEosCjqHX3QXWoMrN-y2Dc4U9FQviCWLUqcKWDSma-cLAK8IsopD/exec" method="POST">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+          </div>
+          <div>
+            <label for="email">Email <span style="color:red;">*</span></label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+          </div>
+          <button type="submit">JOIN OUR FAMILY</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('leadForm');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch(form.action, {
+          method: 'POST',
+          body: formData
+        }).then(() => {
+          alert('Thank you for joining our family!');
+          form.reset();
+        }).catch((error) => {
+          console.error('Submission Error:', error);
+          alert('Submission failed. Please try again later.');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
