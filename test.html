@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Pulse - Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Subscribe to Market Pulse</h2>
+        <p>Stay updated with our latest insights!</p>
+        <form id="signupForm">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p class="message" id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let email = document.getElementById("email").value;
+            let responseMessage = document.getElementById("responseMessage");
+            
+            fetch("https://script.google.com/macros/s/AKfycbwPAFL9Zp93xZ9KOhkKBHusM9Kz7-obficqP6PymSQ7JgZw5LNc1WgmZo8vRBK2G62Y/exec", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: new URLSearchParams({"email": email})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    responseMessage.style.color = "green";
+                    responseMessage.textContent = "Thank you for signing up!";
+                    document.getElementById("signupForm").reset();
+                } else {
+                    responseMessage.style.color = "red";
+                    responseMessage.textContent = "Error! Please try again.";
+                }
+            })
+            .catch(error => {
+                responseMessage.style.color = "red";
+                responseMessage.textContent = "Something went wrong. Please try again.";
+            });
+        });
+    </script>
+</body>
+</html>
